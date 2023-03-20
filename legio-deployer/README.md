@@ -1,6 +1,6 @@
-# legio2maven
+# legio-deployer
 
-Transform an artifact.legio in pom.xml
+Post a deploy to cesar
 
 ## How to use it.
 
