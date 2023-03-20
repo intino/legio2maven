@@ -1,6 +1,6 @@
 dsl Legio
 
-Artifact("io.intino", "1.0.0") legio2maven
+Artifact("io.intino", "1.0.1") legio2maven
 	Imports
 		Compile("io.intino.magritte" ,"builder", "4.2.3")
 		Compile("tara.dsl" ,"legio", "4.0.0")
