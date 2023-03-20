@@ -1,13 +1,10 @@
 dsl Legio
 
-Artifact("io.intino", "1.0.1") legio2maven
+Artifact("io.intino", "1.0.2") legio2maven
 	Imports
-		Compile("io.intino.magritte" ,"builder", "4.2.3")
-		Compile("tara.dsl" ,"legio", "4.0.0")
-		Compile("io.intino.legio" ,"model", "4.0.0")
-		Compile("io.intino.magritte", "framework", "3.4.6")
 		Compile("org.siani.itrules", "itrules", "1.9.3")
 		Compile("io.intino.alexandria", "logger", "2.1.0")
+		Compile("io.intino", "conf-loader", "1.0.0")
 		Test("junit", "junit", "4.13.2")
 
 	Package(mode = ModulesAndLibrariesExtracted) as Runnable("io.intino.legio2maven.Legio2Maven")

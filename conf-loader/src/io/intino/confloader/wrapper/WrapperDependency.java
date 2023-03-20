@@ -1,35 +1,32 @@
-package io.intino.legio2maven.wrapper;
+package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
-import io.intino.legio.model.LegioGraph;
+import io.intino.legio.model.Artifact;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import static io.intino.legio2maven.Safe.safe;
+public class WrapperDependency implements Configuration.Artifact.Dependency {
 
+	private final Artifact.Imports.Dependency dep;
 
-public class WrapperDatahub implements Configuration.Artifact.Dependency.DataHub {
-
-	private final LegioGraph graph;
-
-	public WrapperDatahub(LegioGraph graph) {
-		this.graph = graph;
+	public WrapperDependency(Artifact.Imports.Dependency dep) {
+		this.dep = dep;
 	}
 
 	@Override
 	public String groupId() {
-		return safe(() -> graph.artifact().dataHub().groupId());
+		return dep.groupId();
 	}
 
 	@Override
 	public String artifactId() {
-		return safe(() -> graph.artifact().dataHub().artifactId());
+		return dep.artifactId();
 	}
 
 	@Override
 	public String version() {
-		return safe(() -> graph.artifact().dataHub().version());
+		return dep.version();
 	}
 
 	@Override
@@ -39,12 +36,22 @@ public class WrapperDatahub implements Configuration.Artifact.Dependency.DataHub
 
 	@Override
 	public String scope() {
-		return "COMPILE";
+		return dep.core$().conceptList().get(0).name();
 	}
 
 	@Override
 	public List<Exclude> excludes() {
-		return Collections.emptyList();
+		return dep.excludeList().stream().map(e -> new Exclude() {
+			@Override
+			public String groupId() {
+				return e.groupId();
+			}
+
+			@Override
+			public String artifactId() {
+				return e.artifactId();
+			}
+		}).collect(Collectors.toList());
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package io.intino.legio2maven.wrapper;
+package io.intino.confloader.wrapper;
 
 
 import io.intino.Configuration;

@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 
 import static io.intino.Configuration.Artifact.Package.Mode.LibrariesLinkedByManifest;
 import static io.intino.Configuration.Artifact.Package.Mode.ModulesAndLibrariesLinkedByManifest;
-import static io.intino.legio2maven.Safe.safe;
-import static io.intino.legio2maven.Safe.safeList;
+import static io.intino.confloader.Safe.safe;
+import static io.intino.confloader.Safe.safeList;
 import static java.io.File.separator;
 
 

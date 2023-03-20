@@ -1,0 +1,14 @@
+dsl Legio
+
+Artifact("io.intino", "1.0.0") legio-deployer
+	Imports
+		Test("junit", "junit", "4.13")
+		Compile("io.intino", "cesar-api-accessor", "5.2.4")
+		Compile("io.intino", "conf-loader", "1.0.0")
+	Package(mode = ModulesAndLibrariesExtracted) as Runnable("io.intino.legiodeployer.Main")
+	Parameter("directory")
+	Parameter("cesar_url")
+	Parameter("cesar_token")
+Repository("intino-maven") > Release("https://artifactory.intino.io/artifactory/releases")
+
+RunConfiguration local

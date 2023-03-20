@@ -1,4 +1,4 @@
-package io.intino.legio2maven.wrapper;
+package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
 import io.intino.legio.model.Artifact.Distribution.Artifactory;
@@ -6,7 +6,7 @@ import io.intino.legio.model.LegioGraph;
 
 import java.util.List;
 
-import static io.intino.legio2maven.Safe.safe;
+import static io.intino.confloader.Safe.safe;
 import static java.util.stream.Collectors.toList;
 
 public class WrapperConfiguration implements Configuration {

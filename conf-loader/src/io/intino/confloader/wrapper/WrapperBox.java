@@ -1,9 +1,9 @@
-package io.intino.legio2maven.wrapper;
+package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
 import io.intino.legio.model.LegioGraph;
 
-import static io.intino.legio2maven.Safe.safe;
+import static io.intino.confloader.Safe.safe;
 
 public class WrapperBox implements Configuration.Artifact.Box {
 

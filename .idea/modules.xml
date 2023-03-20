@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/conf-loader/conf-loader.iml" filepath="$PROJECT_DIR$/conf-loader/conf-loader.iml" />
+      <module fileurl="file://$PROJECT_DIR$/legio-deployer/legio-deployer.iml" filepath="$PROJECT_DIR$/legio-deployer/legio-deployer.iml" />
       <module fileurl="file://$PROJECT_DIR$/legio2maven/legio2maven.iml" filepath="$PROJECT_DIR$/legio2maven/legio2maven.iml" />
     </modules>
   </component>

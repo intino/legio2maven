@@ -1,4 +1,4 @@
-package io.intino.legio2maven;
+package io.intino.confloader;
 
 import java.util.Collections;
 import java.util.List;
