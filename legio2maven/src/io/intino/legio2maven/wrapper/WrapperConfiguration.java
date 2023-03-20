@@ -1,6 +1,7 @@
 package io.intino.legio2maven.wrapper;
 
 import io.intino.Configuration;
+import io.intino.legio.model.Artifact.Distribution.Artifactory;
 import io.intino.legio.model.LegioGraph;
 
 import java.util.List;
@@ -260,43 +261,14 @@ public class WrapperConfiguration implements Configuration {
 				return new Distribution() {
 					@Override
 					public Repository release() {
-						List<io.intino.legio.model.Artifact.Distribution.Artifactory> artifactories = graph.artifact().distribution().artifactoryList();
-						return new Repository() {
-							@Override
-							public String identifier() {
-								return artifactories.isEmpty() ? null : artifactories.get(0).identifier();
-							}
-
-							@Override
-							public String url() {
-								return artifactories.isEmpty() ? null : artifactories.get(0).release().url();
-							}
-
-							@Override
-							public String user() {
-								return null;
-							}
-
-							@Override
-							public String password() {
-								return null;
-							}
-
-							@Override
-							public Configuration root() {
-								return null;
-							}
-
-							@Override
-							public ConfigurationNode owner() {
-								return null;
-							}
-						};
+						List<Artifactory> artifactories = graph.artifact().distribution().artifactoryList();
+						return artifactories.isEmpty() ? null : repository(artifactories.get(0), false);
 					}
 
 					@Override
 					public Repository snapshot() {
-						return null;
+						List<Artifactory> artifactories = graph.artifact().distribution().artifactoryList();
+						return artifactories.isEmpty() || artifactories.get(0).snapshot() == null ? null : repository(artifactories.get(0), true);
 					}
 
 					@Override
@@ -309,6 +281,40 @@ public class WrapperConfiguration implements Configuration {
 						return false;
 					}
 				};
+			}
+
+			@Override
+			public Configuration root() {
+				return null;
+			}
+
+			@Override
+			public ConfigurationNode owner() {
+				return null;
+			}
+		};
+	}
+
+	private static Repository repository(Artifactory artifactory, boolean snapshot) {
+		return new Repository() {
+			@Override
+			public String identifier() {
+				return artifactory.identifier();
+			}
+
+			@Override
+			public String url() {
+				return snapshot ? artifactory.snapshot().url() : artifactory.release().url();
+			}
+
+			@Override
+			public String user() {
+				return null;
+			}
+
+			@Override
+			public String password() {
+				return null;
 			}
 
 			@Override

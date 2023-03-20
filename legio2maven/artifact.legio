@@ -8,6 +8,8 @@ Artifact("io.intino", "1.0.0") legio2maven
 		Compile("io.intino.magritte", "framework", "3.4.6")
 		Compile("org.siani.itrules", "itrules", "1.9.3")
 		Compile("io.intino.alexandria", "logger", "2.1.0")
+		Test("junit", "junit", "4.13.2")
+
 	Package(mode = ModulesAndLibrariesExtracted) as Runnable("io.intino.legio2maven.Legio2Maven")
 	Distribution > Artifactory ("intino-maven")
 			Release("https://artifactory.intino.io/artifactory/release-libraries")

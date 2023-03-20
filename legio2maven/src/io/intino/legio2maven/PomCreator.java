@@ -121,12 +121,12 @@ public class PomCreator {
 
 	private void addRepositories(FrameBuilder builder) {
 		configuration.repositories().forEach(r -> builder.add("repository", createRepositoryFrame(r)));
-		Repository repository = repository();
+		Repository repository = distributionRepository();
 		if (repository != null)
 			builder.add("repository", createDistributionRepositoryFrame(repository, "release"));
 	}
 
-	private Repository repository() {
+	private Repository distributionRepository() {
 		try {
 			Version version = version();
 			if (version.isSnapshot()) return safe(() -> configuration.artifact().distribution().snapshot());
