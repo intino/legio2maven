@@ -11,12 +11,13 @@ import java.net.URL;
 public class Main {
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IntinoException {
 		if (args.length < 3) return;
 		Configuration configuration = configuration(args);
 		ApiAccessor accessor = createAccessor(args[1], args[2]);
 		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor);
-		configuration.artifact().deployments().forEach(deployer::deployTo);
+		for (Configuration.Deployment deployment : configuration.artifact().deployments())
+			deployer.deployTo(deployment);
 
 	}
 
