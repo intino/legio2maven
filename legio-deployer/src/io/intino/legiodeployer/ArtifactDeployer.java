@@ -5,14 +5,17 @@ import io.intino.alexandria.exceptions.BadRequest;
 import io.intino.alexandria.exceptions.Forbidden;
 import io.intino.alexandria.exceptions.InternalServerError;
 import io.intino.alexandria.exceptions.Unauthorized;
+import io.intino.alexandria.logger.Logger;
 import io.intino.cesar.box.ApiAccessor;
 import io.intino.cesar.box.schemas.ProcessDeployment;
 import io.intino.cesar.box.schemas.ProcessDeployment.Artifactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static io.intino.confloader.Safe.safe;
 import static java.util.stream.Collectors.toList;
@@ -20,10 +23,17 @@ import static java.util.stream.Collectors.toList;
 public class ArtifactDeployer {
 	private final Configuration configuration;
 	private final ApiAccessor accessor;
+	private Map<String, Map.Entry<String, String>> credentials;
 
-	public ArtifactDeployer(Configuration configuration, ApiAccessor accessor) {
+	public ArtifactDeployer(Configuration configuration, ApiAccessor accessor, File credentialsFile) {
 		this.configuration = configuration;
 		this.accessor = accessor;
+		try (Stream<String> lines = Files.lines(credentialsFile.toPath())) {
+			this.credentials = lines.map(l -> l.split("\t")).collect(Collectors.toMap(f -> f[0], f -> new AbstractMap.SimpleEntry<>(f[1], f[2])));
+		} catch (IOException e) {
+			Logger.error(e);
+			credentials = new HashMap<>();
+		}
 	}
 
 	public void deployTo(Configuration.Deployment deployment) throws IntinoException {
@@ -59,7 +69,14 @@ public class ArtifactDeployer {
 
 	private List<Artifactory> artifactories() {
 		List<Configuration.Repository> repositories = new ArrayList<>(configuration.repositories());
-		return repositories.stream().map(entry -> new Artifactory().url(entry.url()).id(entry.identifier())).collect(toList());
+		return repositories.stream().map(entry -> credentials(new Artifactory().url(entry.url()).id(entry.identifier()))).collect(toList());
+	}
+
+
+	private Artifactory credentials(Artifactory artifactory) {
+		credentials.keySet().stream().filter(k -> artifactory.id().equals(k)).findFirst()
+				.ifPresent(k -> artifactory.user(credentials.get(k).getKey()).password(credentials.get(k).getValue()));
+		return artifactory;
 	}
 
 	private ProcessDeployment.Packaging.Parameter parametersFromNode(Map.Entry<String, String> node) {

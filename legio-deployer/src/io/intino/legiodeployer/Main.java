@@ -15,7 +15,7 @@ public class Main {
 		if (args.length < 3) return;
 		Configuration configuration = configuration(args);
 		ApiAccessor accessor = createAccessor(args[1], args[2]);
-		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor);
+		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor, new File(args[3]));
 		for (Configuration.Deployment deployment : configuration.artifact().deployments())
 			deployer.deployTo(deployment);
 
