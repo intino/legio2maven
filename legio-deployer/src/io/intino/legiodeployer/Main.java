@@ -20,6 +20,7 @@ public class Main {
 		for (Configuration.Deployment deployment : configuration.artifact().deployments()) {
 			try {
 				deployer.deployTo(deployment);
+				System.out.println("Deployed to " + deployment.server().name());
 			} catch (IntinoException e) {
 				Logger.error(e);
 			}
