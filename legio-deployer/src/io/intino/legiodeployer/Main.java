@@ -1,6 +1,7 @@
 package io.intino.legiodeployer;
 
 import io.intino.Configuration;
+import io.intino.alexandria.logger.Logger;
 import io.intino.cesar.box.ApiAccessor;
 import io.intino.confloader.ConfigurationLoader;
 
@@ -11,13 +12,18 @@ import java.net.URL;
 public class Main {
 
 
-	public static void main(String[] args) throws IntinoException {
+	public static void main(String[] args)  {
 		if (args.length < 3) return;
 		Configuration configuration = configuration(args);
 		ApiAccessor accessor = createAccessor(args[1], args[2]);
 		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor, new File(args[3]));
-		for (Configuration.Deployment deployment : configuration.artifact().deployments())
-			deployer.deployTo(deployment);
+		for (Configuration.Deployment deployment : configuration.artifact().deployments()) {
+			try {
+				deployer.deployTo(deployment);
+			} catch (IntinoException e) {
+				Logger.error(e);
+			}
+		}
 
 	}
 
