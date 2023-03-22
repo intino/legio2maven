@@ -1,16 +1,16 @@
 package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
-import io.intino.legio.model.LegioGraph;
+import io.intino.legio.model.Artifact;
 
 import static io.intino.confloader.Safe.safe;
 
 public class WrapperBox implements Configuration.Artifact.Box {
 
-	private final LegioGraph graph;
+	private final Artifact artifact;
 
-	public WrapperBox(LegioGraph graph) {
-		this.graph = graph;
+	public WrapperBox(Artifact artifact) {
+		this.artifact = artifact;
 	}
 
 	@Override
@@ -20,12 +20,12 @@ public class WrapperBox implements Configuration.Artifact.Box {
 
 	@Override
 	public String version() {
-		return safe(() -> graph.artifact().box().version());
+		return safe(() -> artifact.box().version());
 	}
 
 	@Override
 	public String effectiveVersion() {
-		return safe(() -> graph.artifact().box().effectiveVersion());
+		return safe(() -> artifact.box().effectiveVersion());
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class WrapperBox implements Configuration.Artifact.Box {
 
 	@Override
 	public String targetPackage() {
-		return safe(() -> graph.artifact().box().targetPackage());
+		return safe(() -> artifact.box().targetPackage());
 	}
 
 	@Override

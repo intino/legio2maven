@@ -1,6 +1,7 @@
 package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
+import io.intino.legio.model.Artifact;
 import io.intino.legio.model.LegioGraph;
 
 import java.util.Collections;
@@ -11,25 +12,25 @@ import static io.intino.confloader.Safe.safe;
 
 public class WrapperDatahub implements Configuration.Artifact.Dependency.DataHub {
 
-	private final LegioGraph graph;
+	private final Artifact artifact;
 
-	public WrapperDatahub(LegioGraph graph) {
-		this.graph = graph;
+	public WrapperDatahub(Artifact artifact) {
+		this.artifact = artifact;
 	}
 
 	@Override
 	public String groupId() {
-		return safe(() -> graph.artifact().dataHub().groupId());
+		return safe(() -> artifact.dataHub().groupId());
 	}
 
 	@Override
 	public String artifactId() {
-		return safe(() -> graph.artifact().dataHub().artifactId());
+		return safe(() -> artifact.dataHub().artifactId());
 	}
 
 	@Override
 	public String version() {
-		return safe(() -> graph.artifact().dataHub().version());
+		return safe(() -> artifact.dataHub().version());
 	}
 
 	@Override

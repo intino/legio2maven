@@ -13,8 +13,8 @@ public class Main {
 
 
 	public static void main(String[] args)  {
-		if (args.length < 3) return;
-		Configuration configuration = configuration(args);
+		if (args.length < 4) return;
+		Configuration configuration = configuration(args[0]);
 		ApiAccessor accessor = createAccessor(args[1], args[2]);
 		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor, new File(args[3]));
 		for (Configuration.Deployment deployment : configuration.artifact().deployments()) {
@@ -28,8 +28,8 @@ public class Main {
 
 	}
 
-	private static Configuration configuration(String[] args) {
-		File file = new File(new File(args[0]), "artifact.legio");
+	private static Configuration configuration(String dir) {
+		File file = new File(new File(dir), "artifact.legio");
 		return new ConfigurationLoader().load(file);
 	}
 
