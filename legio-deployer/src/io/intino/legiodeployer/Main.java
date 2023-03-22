@@ -15,6 +15,7 @@ public class Main {
 	public static void main(String[] args)  {
 		if (args.length < 4) return;
 		Configuration configuration = configuration(args[0]);
+		System.out.println("Loaded configuration.");
 		ApiAccessor accessor = createAccessor(args[1], args[2]);
 		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor, new File(args[3]));
 		for (Configuration.Deployment deployment : configuration.artifact().deployments()) {

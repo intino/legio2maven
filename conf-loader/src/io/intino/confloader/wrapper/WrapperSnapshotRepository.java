@@ -4,10 +4,10 @@ package io.intino.confloader.wrapper;
 import io.intino.Configuration;
 import io.intino.legio.model.Repository;
 
-public class WrapperRepository implements Configuration.Repository {
+public class WrapperSnapshotRepository implements Configuration.Repository.Snapshot {
 	private final Repository r;
 
-	public WrapperRepository(Repository r) {
+	public WrapperSnapshotRepository(Repository r) {
 		this.r = r;
 	}
 
@@ -18,7 +18,7 @@ public class WrapperRepository implements Configuration.Repository {
 
 	@Override
 	public String url() {
-		return r.release().url();
+		return r.snapshot().url();
 	}
 
 	@Override

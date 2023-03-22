@@ -1,7 +1,6 @@
 package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
-import io.intino.legio.model.Artifact.Distribution.Artifactory;
 import io.intino.legio.model.LegioGraph;
 
 import java.util.List;
@@ -35,6 +34,8 @@ public class WrapperConfiguration implements Configuration {
 
 	@Override
 	public List<Repository> repositories() {
-		return graph.repositoryList().stream().map(WrapperRepository::new).collect(toList());
+		List<Repository> repos = graph.repositoryList().stream().map(WrapperReleaseRepository::new).collect(toList());
+		repos.addAll(graph.repositoryList().stream().map(WrapperSnapshotRepository::new).toList());
+		return repos;
 	}
 }
