@@ -8,7 +8,9 @@ Artifact("io.intino", "1.0.0") conf-loader
 		Compile("io.intino.magritte", "framework", "3.4.6")
 		Test(groupId = "junit", artifactId = "junit", version = "4.13")
 	Package(mode = ModulesAndLibrariesLinkedByManifest)
-
+	Distribution > Artifactory ("intino-maven")
+			Release("https://artifactory.intino.io/artifactory/release-libraries")
+			Snapshot("https://artifactory.intino.io/artifactory/snapshot-libraries")
 Repository(identifier = "intino-maven")
 	Release("https://artifactory.intino.io/artifactory/releases")
 
