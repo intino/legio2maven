@@ -78,7 +78,6 @@
     <orderEntry type="library" name="Intino: org.eclipse.aether:aether-util:0.9.0.M2" level="project" />
     <orderEntry type="library" scope="TEST" name="Intino: junit:junit:4.13.2" level="project" />
     <orderEntry type="library" name="Intino: io.intino.alexandria:zip:1.0.4" level="project" />
-    <orderEntry type="library" name="Intino: org.sonatype.sisu:sisu-guice:no_aop" level="project" />
     <orderEntry type="library" name="Intino: org.apache.maven:maven-project:2.2.1" level="project" />
     <orderEntry type="library" name="Intino: org.apache.maven:maven-settings:2.2.1" level="project" />
     <orderEntry type="library" name="Intino: org.apache.maven:maven-profile:2.2.1" level="project" />
