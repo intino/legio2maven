@@ -2,17 +2,11 @@ package io.intino.legio2packagejson;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.util.io.ZipUtil;
 import com.jcabi.aether.Aether;
 import io.intino.Configuration.Artifact;
 import io.intino.Configuration.Artifact.WebArtifact;
 import io.intino.Configuration.Repository;
-import io.intino.plugin.dependencyresolution.ArtifactoryConnector;
-import io.intino.plugin.settings.ArtifactoryCredential;
-import io.intino.plugin.settings.IntinoSettings;
-import org.jetbrains.annotations.NotNull;
+import io.intino.alexandria.logger.Logger;
 import org.sonatype.aether.repository.Authentication;
 import org.sonatype.aether.repository.RemoteRepository;
 import org.sonatype.aether.repository.RepositoryPolicy;
@@ -21,27 +15,26 @@ import org.sonatype.aether.util.artifact.DefaultArtifact;
 import org.sonatype.aether.util.artifact.JavaScopes;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.*;
+import java.util.zip.ZipInputStream;
 
 import static org.sonatype.aether.repository.RepositoryPolicy.UPDATE_POLICY_ALWAYS;
 import static org.sonatype.aether.repository.RepositoryPolicy.UPDATE_POLICY_DAILY;
 
 public class WebArtifactResolver {
-	private final Project project;
+	public static final String MAVEN_URL = "https://repo1.maven.org/maven2/";
 	private final Artifact artifact;
 	private final List<Repository> repositories;
+	private final Map<String, Map.Entry<String, String>> credentials;
 	private final File destination;
 
-	public WebArtifactResolver(Project project, Artifact artifact, List<Repository> repositories, File destination) {
-		this.project = project;
+	public WebArtifactResolver(Artifact artifact, List<Repository> repositories, Map<String, Map.Entry<String, String>> credentials, File destination) {
 		this.artifact = artifact;
 		this.repositories = repositories;
+		this.credentials = credentials;
 		this.destination = destination;
 	}
 
@@ -95,11 +88,11 @@ public class WebArtifactResolver {
 	private File extract(WebArtifact artifact, File jarFile) {
 		try {
 			final File outputDir = new File(destination, artifact.name().toLowerCase());
-			ZipUtil.extract(jarFile.toPath(), outputDir.toPath(), null);
-			FileUtil.delete(new File(outputDir, "META-INF"));
+			io.intino.alexandria.zip.Zip.unzip(new ZipInputStream(new FileInputStream(jarFile)), outputDir.getAbsolutePath());
+			Files.delete(new File(outputDir, "META-INF").toPath());
 			return new File(outputDir, "package.json");
 		} catch (IOException e) {
-			logger.error("Error extracting widgets", e);
+			Logger.error("Error extracting widgets", e);
 			return null;
 		}
 	}
@@ -108,7 +101,7 @@ public class WebArtifactResolver {
 		try {
 			return aether.resolve(new DefaultArtifact(artifact.groupId().toLowerCase(), artifact.artifactId().toLowerCase(), "sources", "jar", artifact.version()), JavaScopes.COMPILE);
 		} catch (DependencyResolutionException e) {
-			logger.warn("Error resolving widgets", e);
+			Logger.warn("Error resolving widgets");
 		}
 		return Collections.emptyList();
 	}
@@ -118,7 +111,7 @@ public class WebArtifactResolver {
 		try {
 			return readJson(file);
 		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
+			Logger.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -127,11 +120,10 @@ public class WebArtifactResolver {
 		return new Gson().fromJson(new String(Files.readAllBytes(file.toPath())), JsonObject.class);
 	}
 
-	@NotNull
 	private Collection<RemoteRepository> collectRemotes() {
 		Collection<RemoteRepository> remotes = new ArrayList<>();
-		remotes.add(new RemoteRepository("maven-central", "default", ArtifactoryConnector.MAVEN_URL).setPolicy(false, new RepositoryPolicy().setEnabled(true).setUpdatePolicy(RepositoryPolicy.UPDATE_POLICY_DAILY)));
-		remotes.addAll(repositories.stream().map(this::repository).collect(Collectors.toList()));
+		remotes.add(new RemoteRepository("maven-central", "default", MAVEN_URL).setPolicy(false, new RepositoryPolicy().setEnabled(true).setUpdatePolicy(RepositoryPolicy.UPDATE_POLICY_DAILY)));
+		remotes.addAll(repositories.stream().map(this::repository).toList());
 		return remotes;
 	}
 
@@ -147,20 +139,16 @@ public class WebArtifactResolver {
 		return repository;
 	}
 
-
 	private Authentication provideAuthentication(String mavenId) {
-		final IntinoSettings settings = IntinoSettings.getInstance(project);
-		for (ArtifactoryCredential credential : settings.artifactories())
-			if (credential.serverId.equals(mavenId))
-				return new Authentication(credential.username, credential.password);
-		return null;
+		Map.Entry<String, String> entry = credentials.get(mavenId);
+		return entry != null ? new Authentication(entry.getKey(), entry.getValue()) : null;
 	}
 
 	private void write(String content, File destiny) {
 		try {
-			Files.write(destiny.toPath(), content.getBytes()).toFile();
+			Files.writeString(destiny.toPath(), content);
 		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
+			Logger.error(e.getMessage(), e);
 		}
 	}
 }

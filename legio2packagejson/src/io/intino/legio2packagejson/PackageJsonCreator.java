@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import io.intino.Configuration;
 import io.intino.Configuration.Artifact;
-import io.intino.Configuration.Repository;
+import io.intino.alexandria.logger.Logger;
 import io.intino.itrules.Frame;
 import io.intino.itrules.FrameBuilder;
 import org.apache.commons.lang3.SystemUtils;
@@ -13,20 +13,22 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PackageJsonCreator {
-	private final Module module;
 	private final Artifact artifact;
 	private final List<Artifact.WebComponent> webComponents;
 	private final List<Artifact.WebResolution> resolutions;
 	private final WebArtifactResolver webArtifactResolver;
+	private Map<String, Map.Entry<String, String>> credentials;
 
-	public PackageJsonCreator(File root, Configuration conf, File destination) {
+	public PackageJsonCreator(Configuration conf, File credentialsFile, File destination) {
 		this.artifact = conf.artifact();
 		this.webComponents = artifact.webComponents();
 		this.resolutions = artifact.webResolutions();
-		this.webArtifactResolver = new WebArtifactResolver(this.module.getProject(), artifact, repositories, destination);
-
+		loadCredentials(credentialsFile);
+		this.webArtifactResolver = new WebArtifactResolver(artifact, conf.repositories(), credentials, destination);
 	}
 
 	public void createPackageFile(File rootDirectory) {
@@ -84,9 +86,19 @@ public class PackageJsonCreator {
 
 	private void write(String content, File destiny) {
 		try {
-			Files.write(destiny.toPath(), content.getBytes()).toFile();
+			Files.writeString(destiny.toPath(), content);
 		} catch (IOException e) {
-			logger.error(e.getMessage(), e);
+			Logger.error(e.getMessage(), e);
 		}
 	}
+
+	private void loadCredentials(File credentialsFile) {
+		try (Stream<String> lines = Files.lines(credentialsFile.toPath())) {
+			this.credentials = lines.map(l -> l.split("\t")).collect(Collectors.toMap(f -> f[0], f -> new AbstractMap.SimpleEntry<>(f[1], f[2])));
+		} catch (IOException e) {
+			Logger.error(e);
+			credentials = new HashMap<>();
+		}
+	}
+
 }

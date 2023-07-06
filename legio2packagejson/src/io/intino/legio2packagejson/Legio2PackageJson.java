@@ -12,6 +12,6 @@ public class Legio2PackageJson {
 		File root = new File(args[0]);
 		File file = new File(root, "artifact.legio");
 		Configuration conf = new ConfigurationLoader().load(file);
-		new PackageJsonCreator(conf, root).create(new File(root, "pom.xml"));
+		new PackageJsonCreator(conf, new File(args[1]), new File(root, "node_modules")).createPackageFile(root);
 	}
 }

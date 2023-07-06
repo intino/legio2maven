@@ -28,6 +28,10 @@ public class ArtifactDeployer {
 	public ArtifactDeployer(Configuration configuration, ApiAccessor accessor, File credentialsFile) {
 		this.configuration = configuration;
 		this.accessor = accessor;
+		loadCredentials(credentialsFile);
+	}
+
+	private void loadCredentials(File credentialsFile) {
 		try (Stream<String> lines = Files.lines(credentialsFile.toPath())) {
 			this.credentials = lines.map(l -> l.split("\t")).collect(Collectors.toMap(f -> f[0], f -> new AbstractMap.SimpleEntry<>(f[1], f[2])));
 		} catch (IOException e) {

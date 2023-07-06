@@ -9,10 +9,74 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="Intino: junit:junit:4.13" level="project" />
     <orderEntry type="library" scope="TEST" name="Intino: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Intino: org.siani.itrules:itrules:1.9.3" level="project" />
     <orderEntry type="library" name="Intino: io.intino.alexandria:logger:2.1.0" level="project" />
     <orderEntry type="library" name="Intino: org.apache.commons:commons-lang3:3.12.0" level="project" />
+    <orderEntry type="module" module-name="conf-loader" />
+    <orderEntry type="library" name="Intino: io.intino:conf-loader:1.1.0" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.magritte:builder:4.2.3" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.magritte:builder-core:1.0.2" level="project" />
+    <orderEntry type="library" name="Intino: org.antlr:antlr4-runtime:4.10.1" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.itrules:engine:1.0.0" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.magritte:builder-constants:3.0.1" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.magritte:io:3.0.0" level="project" />
+    <orderEntry type="library" name="Intino: com.esotericsoftware:kryo:4.0.0" level="project" />
+    <orderEntry type="library" name="Intino: com.esotericsoftware:reflectasm:1.11.3" level="project" />
+    <orderEntry type="library" name="Intino: org.ow2.asm:asm:5.0.4" level="project" />
+    <orderEntry type="library" name="Intino: com.esotericsoftware:minlog:1.3.0" level="project" />
+    <orderEntry type="library" name="Intino: org.objenesis:objenesis:2.2" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.magritte:language:1.3.2" level="project" />
+    <orderEntry type="library" name="Intino: com.google.code.gson:gson:2.8.9" level="project" />
+    <orderEntry type="library" name="Intino: tara.dsl:legio:4.0.0" level="project" />
+    <orderEntry type="library" name="Intino: io.intino:configuration:1.4.0" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.legio:model:4.0.0" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.magritte:framework:3.4.6" level="project" />
+    <orderEntry type="library" name="Intino: com.jcabi:jcabi-aether:0.10.1" level="project" />
+    <orderEntry type="library" name="Intino: org.hibernate:hibernate-validator:5.1.2.Final" level="project" />
+    <orderEntry type="library" name="Intino: org.jboss.logging:jboss-logging:3.1.3.GA" level="project" />
+    <orderEntry type="library" name="Intino: com.fasterxml:classmate:1.0.0" level="project" />
+    <orderEntry type="library" name="Intino: com.jcabi:jcabi-aspects:0.18" level="project" />
+    <orderEntry type="library" name="Intino: com.jcabi:jcabi-log:0.14.3" level="project" />
+    <orderEntry type="library" name="Intino: org.aspectj:aspectjrt:1.8.2" level="project" />
+    <orderEntry type="library" name="Intino: javax.validation:validation-api:1.1.0.Final" level="project" />
+    <orderEntry type="library" name="Intino: org.kuali.maven.wagons:maven-s3-wagon:1.1.20" level="project" />
+    <orderEntry type="library" name="Intino: org.kuali.common:kuali-s3:1.0.1" level="project" />
+    <orderEntry type="library" name="Intino: com.amazonaws:aws-java-sdk:1.4.2" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.httpcomponents:httpclient:4.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.httpcomponents:httpcore:4.1" level="project" />
+    <orderEntry type="library" name="Intino: commons-codec:commons-codec:1.9" level="project" />
+    <orderEntry type="library" name="Intino: org.codehaus.jackson:jackson-core-asl:1.8.9" level="project" />
+    <orderEntry type="library" name="Intino: org.codehaus.jackson:jackson-mapper-asl:1.8.9" level="project" />
+    <orderEntry type="library" name="Intino: org.springframework:spring-core:3.1.2.RELEASE" level="project" />
+    <orderEntry type="library" name="Intino: commons-io:commons-io:2.4" level="project" />
+    <orderEntry type="library" name="Intino: commons-lang:commons-lang:2.6" level="project" />
+    <orderEntry type="library" name="Intino: org.kuali.common:kuali-threads:1.0.9" level="project" />
+    <orderEntry type="library" name="Intino: org.slf4j:jcl-over-slf4j:1.6.4" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.aether:aether-api:1.13.1" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.aether:aether-spi:1.13.1" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.aether:aether-util:1.13.1" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.aether:aether-connector-file:1.13.1" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.aether:aether-connector-asynchttpclient:1.13.1" level="project" />
+    <orderEntry type="library" name="Intino: com.ning:async-http-client:1.6.5" level="project" />
+    <orderEntry type="library" name="Intino: org.jboss.netty:netty:3.2.5.Final" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.aether:aether-connector-wagon:1.13.1" level="project" />
+    <orderEntry type="library" name="Intino: org.codehaus.plexus:plexus-classworlds:2.4" level="project" />
+    <orderEntry type="library" name="Intino: org.codehaus.plexus:plexus-utils:2.0.7" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.sisu:sisu-inject-plexus:2.2.3" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.sisu:sisu-inject-bean:2.2.3" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.aether:aether-impl:1.13.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-aether-provider:3.0.5" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-model:3.0.5" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-model-builder:3.0.5" level="project" />
+    <orderEntry type="library" name="Intino: org.codehaus.plexus:plexus-interpolation:1.14" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-repository-metadata:3.0.5" level="project" />
+    <orderEntry type="library" name="Intino: org.codehaus.plexus:plexus-component-annotations:1.5.5" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven.wagon:wagon-provider-api:2.4" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-artifact:3.0.5" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven.shared:maven-dependency-tree:2.1" level="project" />
+    <orderEntry type="library" name="Intino: org.eclipse.aether:aether-util:0.9.0.M2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Intino: junit:junit:4.13.2" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.alexandria:zip:1.0.4" level="project" />
   </component>
 </module>
