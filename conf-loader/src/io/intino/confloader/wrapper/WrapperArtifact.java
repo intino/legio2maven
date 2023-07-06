@@ -201,7 +201,7 @@ public class WrapperArtifact implements Configuration.Artifact {
 
 			@Override
 			public List<String> mavenPlugins() {
-				return artifact.package$().mavenPluginList().stream().map(m -> m.code()).collect(toList());
+				return artifact.package$().mavenPluginList().stream().map(Artifact.Package.MavenPlugin::code).collect(toList());
 			}
 
 			@Override
@@ -313,6 +313,11 @@ public class WrapperArtifact implements Configuration.Artifact {
 			@Override
 			public String password() {
 				return null;
+			}
+
+			@Override
+			public UpdatePolicy updatePolicy() {
+				return UpdatePolicy.Always;
 			}
 
 			@Override

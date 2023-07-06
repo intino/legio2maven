@@ -32,6 +32,11 @@ public class WrapperSnapshotRepository implements Configuration.Repository.Snaps
 	}
 
 	@Override
+	public UpdatePolicy updatePolicy() {
+		return UpdatePolicy.Always;
+	}
+
+	@Override
 	public Configuration root() {
 		return null;
 	}

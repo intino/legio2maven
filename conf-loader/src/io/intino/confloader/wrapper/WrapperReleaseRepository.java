@@ -32,6 +32,11 @@ public class WrapperReleaseRepository implements Configuration.Repository.Releas
 	}
 
 	@Override
+	public UpdatePolicy updatePolicy() {
+		return UpdatePolicy.Always;
+	}
+
+	@Override
 	public Configuration root() {
 		return null;
 	}

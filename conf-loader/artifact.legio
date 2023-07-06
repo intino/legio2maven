@@ -1,12 +1,13 @@
 dsl Legio
 
-Artifact("io.intino", "1.0.0") conf-loader
+Artifact("io.intino", "1.1.0") conf-loader
 	Imports
-		Compile("io.intino.magritte" ,"builder", "4.2.3")
-		Compile("tara.dsl" ,"legio", "4.0.0")
+		Compile("io.intino.magritte", "builder", "4.2.3") > Exclude("io.intino","configuration")
+		Compile("tara.dsl", "legio", "4.0.0")
+		Compile("io.intino","configuration","1.4.0")
 		Compile("io.intino.legio" ,"model", "4.0.0")
 		Compile("io.intino.magritte", "framework", "3.4.6")
-		Test(groupId = "junit", artifactId = "junit", version = "4.13")
+		Test("junit", "junit", "4.13")
 	Package(mode = ModulesAndLibrariesLinkedByManifest)
 	Distribution > Artifactory ("intino-maven")
 			Release("https://artifactory.intino.io/artifactory/release-libraries")
