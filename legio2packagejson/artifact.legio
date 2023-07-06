@@ -12,7 +12,9 @@ Artifact("io.intino", "1.0.0") legio2packagejson
 			Exclude("org.slf4j","org.slf4j:jcl-over-slf4j")
 		Test("junit", "junit", "4.13.2")
 	Package(mode = ModulesAndLibrariesLinkedByManifest)
-
+	Distribution > Artifactory ("intino-maven")
+			Release("https://artifactory.intino.io/artifactory/release-libraries")
+			Snapshot("https://artifactory.intino.io/artifactory/snapshot-libraries")
 Repository(identifier = "intino-maven") > Release("https://artifactory.intino.io/artifactory/releases")
 
 RunConfiguration local
