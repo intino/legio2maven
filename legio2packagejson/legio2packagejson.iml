@@ -79,5 +79,21 @@
     <orderEntry type="library" scope="TEST" name="Intino: junit:junit:4.13.2" level="project" />
     <orderEntry type="library" name="Intino: io.intino.alexandria:zip:1.0.4" level="project" />
     <orderEntry type="library" name="Intino: org.sonatype.sisu:sisu-guice:no_aop" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-project:2.2.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-settings:2.2.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-profile:2.2.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-artifact-manager:2.2.1" level="project" />
+    <orderEntry type="library" name="Intino: backport-util-concurrent:backport-util-concurrent:3.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-plugin-registry:2.2.1" level="project" />
+    <orderEntry type="library" name="Intino: org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1" level="project" />
+    <orderEntry type="library" name="Intino: junit:junit:3.8.1" level="project" />
+    <orderEntry type="library" name="Intino: classworlds:classworlds:1.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-settings-builder:3.8.1" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven:maven-builder-support:3.8.1" level="project" />
+    <orderEntry type="library" name="Intino: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.plexus:plexus-sec-dispatcher:1.4" level="project" />
+    <orderEntry type="library" name="Intino: org.sonatype.plexus:plexus-cipher:1.7" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven.shared:maven-invoker:3.1.0" level="project" />
+    <orderEntry type="library" name="Intino: org.apache.maven.shared:maven-shared-utils:3.3.3" level="project" />
   </component>
 </module>
