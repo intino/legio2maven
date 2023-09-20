@@ -35,7 +35,7 @@ public class WrapperConfiguration implements Configuration {
 	@Override
 	public List<Repository> repositories() {
 		List<Repository> repos = graph.repositoryList().stream().map(WrapperReleaseRepository::new).collect(toList());
-		repos.addAll(graph.repositoryList().stream().map(WrapperSnapshotRepository::new).toList());
+		repos.addAll(graph.repositoryList().stream().filter(r -> r.snapshot() != null).map(WrapperSnapshotRepository::new).toList());
 		return repos;
 	}
 }
