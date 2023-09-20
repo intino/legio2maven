@@ -83,17 +83,17 @@ public class WrapperArtifact implements Configuration.Artifact {
 
 	@Override
 	public List<Configuration.Artifact.WebComponent> webComponents() {
-		return null;
+		return artifact.imports().webList().stream().map(WrapperWebComponent::new).collect(toList());
 	}
 
 	@Override
 	public List<Configuration.Artifact.WebResolution> webResolutions() {
-		return null;
+		return artifact.webImports().resolutionList().stream().map(WrapperResolution::new).collect(toList());
 	}
 
 	@Override
 	public List<Configuration.Artifact.WebArtifact> webArtifacts() {
-		return null;
+		return artifact.webImports().webArtifactList().stream().map(WrapperWebArtifact::new).collect(toList());
 	}
 
 	@Override
