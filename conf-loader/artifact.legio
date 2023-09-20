@@ -1,6 +1,6 @@
 dsl Legio
 
-Artifact("io.intino", "1.1.0") conf-loader
+Artifact("io.intino", "1.1.1") conf-loader
 	Imports
 		Compile("io.intino.magritte", "builder", "4.2.3") > Exclude("io.intino","configuration")
 		Compile("tara.dsl", "legio", "4.0.0")
