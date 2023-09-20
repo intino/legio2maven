@@ -15,12 +15,8 @@
     <orderEntry type="library" name="Intino: org.apache.commons:commons-lang3:3.12.0" level="project" />
     <orderEntry type="module" module-name="conf-loader" />
     <orderEntry type="library" name="Intino: com.jcabi:jcabi-aether:0.10.1" level="project" />
-    <orderEntry type="library" name="Intino: org.hibernate:hibernate-validator:5.1.2.Final" level="project" />
-    <orderEntry type="library" name="Intino: org.jboss.logging:jboss-logging:3.1.3.GA" level="project" />
-    <orderEntry type="library" name="Intino: com.fasterxml:classmate:1.0.0" level="project" />
     <orderEntry type="library" name="Intino: com.jcabi:jcabi-aspects:0.18" level="project" />
     <orderEntry type="library" name="Intino: com.jcabi:jcabi-log:0.14.3" level="project" />
-    <orderEntry type="library" name="Intino: org.aspectj:aspectjrt:1.8.2" level="project" />
     <orderEntry type="library" name="Intino: javax.validation:validation-api:1.1.0.Final" level="project" />
     <orderEntry type="library" name="Intino: org.kuali.maven.wagons:maven-s3-wagon:1.1.20" level="project" />
     <orderEntry type="library" name="Intino: org.kuali.common:kuali-s3:1.0.1" level="project" />
@@ -93,6 +89,11 @@
     <orderEntry type="library" name="Intino: io.intino.legio:model:4.0.0" level="project" />
     <orderEntry type="library" name="Intino: io.intino.magritte:framework:3.4.6" level="project" />
     <orderEntry type="library" name="Intino: io.intino:configuration:1.4.0" level="project" />
-    <orderEntry type="library" name="Intino: org.sonatype.sisu:sisu-guice:no_aop" level="project" />
+    <orderEntry type="library" name="Intino: io.intino:conf-loader:1.1.1" level="project" />
+    <orderEntry type="library" name="Intino: org.slf4j:slf4j-api:1.7.5" level="project" />
+    <orderEntry type="library" name="Intino: org.hibernate:hibernate-validator:5.1.2.Final" level="project" />
+    <orderEntry type="library" name="Intino: org.jboss.logging:jboss-logging:3.1.3.GA" level="project" />
+    <orderEntry type="library" name="Intino: com.fasterxml:classmate:1.0.0" level="project" />
+    <orderEntry type="library" name="Intino: org.aspectj:aspectjrt:1.8.2" level="project" />
   </component>
 </module>
