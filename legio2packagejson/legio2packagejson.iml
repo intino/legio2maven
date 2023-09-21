@@ -6,6 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/gen" isTestSource="false" generated="true" />
       <sourceFolder url="file://$MODULE_DIR$/res" type="java-resource" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
@@ -55,7 +56,6 @@
     <orderEntry type="library" name="Intino: org.apache.maven.shared:maven-dependency-tree:2.1" level="project" />
     <orderEntry type="library" name="Intino: org.eclipse.aether:aether-util:0.9.0.M2" level="project" />
     <orderEntry type="library" scope="TEST" name="Intino: junit:junit:4.13.2" level="project" />
-    <orderEntry type="library" name="Intino: io.intino.alexandria:zip:1.0.4" level="project" />
     <orderEntry type="library" name="Intino: org.apache.maven:maven-project:2.2.1" level="project" />
     <orderEntry type="library" name="Intino: org.apache.maven:maven-settings:2.2.1" level="project" />
     <orderEntry type="library" name="Intino: org.apache.maven:maven-profile:2.2.1" level="project" />
@@ -94,6 +94,7 @@
     <orderEntry type="library" name="Intino: io.intino.legio:model:4.0.0" level="project" />
     <orderEntry type="library" name="Intino: io.intino.magritte:framework:3.4.6" level="project" />
     <orderEntry type="library" name="Intino: io.intino:configuration:1.4.0" level="project" />
-    <orderEntry type="library" name="Intino: org.sonatype.sisu:sisu-guice:no_aop" level="project" />
+    <orderEntry type="library" name="Intino: io.intino.alexandria:zip:1.0.5" level="project" />
+    <orderEntry type="library" name="Intino: io.intino:conf-loader:1.1.2" level="project" />
   </component>
 </module>

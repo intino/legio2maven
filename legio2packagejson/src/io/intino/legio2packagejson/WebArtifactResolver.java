@@ -7,6 +7,7 @@ import io.intino.Configuration.Artifact;
 import io.intino.Configuration.Artifact.WebArtifact;
 import io.intino.Configuration.Repository;
 import io.intino.alexandria.logger.Logger;
+import org.apache.commons.io.FileUtils;
 import org.sonatype.aether.repository.Authentication;
 import org.sonatype.aether.repository.RemoteRepository;
 import org.sonatype.aether.repository.RepositoryPolicy;
@@ -88,8 +89,9 @@ public class WebArtifactResolver {
 	private File extract(WebArtifact artifact, File jarFile) {
 		try {
 			final File outputDir = new File(destination, artifact.name().toLowerCase());
+			outputDir.mkdirs();
 			io.intino.alexandria.zip.Zip.unzip(new ZipInputStream(new FileInputStream(jarFile)), outputDir.getAbsolutePath());
-			Files.delete(new File(outputDir, "META-INF").toPath());
+			FileUtils.deleteDirectory(new File(outputDir, "META-INF"));
 			return new File(outputDir, "package.json");
 		} catch (IOException e) {
 			Logger.error("Error extracting widgets", e);

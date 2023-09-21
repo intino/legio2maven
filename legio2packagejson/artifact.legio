@@ -1,10 +1,10 @@
 dsl Legio
 
-Artifact("io.intino", "1.0.5") legio2packagejson
+Artifact("io.intino", "1.0.6") legio2packagejson
 	Imports
 		Compile("org.siani.itrules", "itrules", "1.9.3")
 		Compile("io.intino.alexandria", "logger", "2.1.0")
-		Compile("io.intino.alexandria", "zip", "1.0.4")
+		Compile("io.intino.alexandria", "zip", "1.0.5")
 		Compile("io.intino", "conf-loader", "1.1.2")
 		Compile("org.apache.commons", "commons-lang3", "3.12.0")
 		Compile("com.jcabi", "jcabi-aether", "0.10.1")
