@@ -6,6 +6,7 @@ import io.intino.legio.model.Artifact;
 import java.util.List;
 
 import static io.intino.confloader.Safe.safe;
+import static io.intino.confloader.Safe.safeList;
 import static java.util.stream.Collectors.toList;
 
 public class WrapperArtifact implements Configuration.Artifact {
@@ -78,22 +79,22 @@ public class WrapperArtifact implements Configuration.Artifact {
 
 	@Override
 	public List<Configuration.Artifact.Dependency> dependencies() {
-		return artifact.imports().dependencyList().stream().map(WrapperDependency::new).collect(toList());
+		return safeList(()->artifact.imports().dependencyList().stream().map(WrapperDependency::new).collect(toList()));
 	}
 
 	@Override
 	public List<Configuration.Artifact.WebComponent> webComponents() {
-		return artifact.imports().webList().stream().map(WrapperWebComponent::new).collect(toList());
+		return safeList(() -> artifact.webImports().webComponentList().stream().map(WrapperWebComponent::new).collect(toList()));
 	}
 
 	@Override
 	public List<Configuration.Artifact.WebResolution> webResolutions() {
-		return artifact.webImports().resolutionList().stream().map(WrapperResolution::new).collect(toList());
+		return safeList(() -> artifact.webImports().resolutionList().stream().map(WrapperResolution::new).collect(toList()));
 	}
 
 	@Override
 	public List<Configuration.Artifact.WebArtifact> webArtifacts() {
-		return artifact.webImports().webArtifactList().stream().map(WrapperWebArtifact::new).collect(toList());
+		return safeList(() -> artifact.webImports().webArtifactList().stream().map(WrapperWebArtifact::new).collect(toList()));
 	}
 
 	@Override
