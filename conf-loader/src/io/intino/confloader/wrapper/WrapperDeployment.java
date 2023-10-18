@@ -109,6 +109,32 @@ public class WrapperDeployment implements Configuration.Deployment {
 
 	@Override
 	public Requirements requirements() {
-		return null;
+		Artifact.Deployment.Requirements requirements = d.requirements();
+		return requirements == null ? null : new Requirements() {
+			@Override
+			public int minHdd() {
+				return 0;
+			}
+
+			@Override
+			public int minMemory() {
+				return requirements.memory().min();
+			}
+
+			@Override
+			public int maxMemory() {
+				return requirements.memory().max();
+			}
+
+			@Override
+			public String jvmVersion() {
+				return requirements.jVM().version();
+			}
+
+			@Override
+			public Sync sync() {
+				return null;
+			}
+		};
 	}
 }

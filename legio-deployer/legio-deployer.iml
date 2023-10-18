@@ -35,7 +35,6 @@
     <orderEntry type="library" name="Intino: org.glassfish.grizzly:grizzly-framework:2.3.22" level="project" />
     <orderEntry type="library" name="Intino: org.glassfish.grizzly:grizzly-http-server:2.3.22" level="project" />
     <orderEntry type="library" name="Intino: org.glassfish.grizzly:grizzly-http:2.3.22" level="project" />
-    <orderEntry type="library" name="Intino: io.intino:conf-loader:1.1.1" level="project" />
     <orderEntry type="library" name="Intino: io.intino.magritte:builder:4.2.3" level="project" />
     <orderEntry type="library" name="Intino: io.intino.magritte:builder-core:1.0.2" level="project" />
     <orderEntry type="library" name="Intino: org.antlr:antlr4-runtime:4.10.1" level="project" />
