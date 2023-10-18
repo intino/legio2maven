@@ -59,12 +59,19 @@ public class ArtifactDeployer {
 
 	private ProcessDeployment createDeployment(Configuration.Artifact.Package packageConfiguration, Configuration.Deployment destination) {
 		final String classpathPrefix = packageConfiguration.classpathPrefix();
-		return new ProcessDeployment().
+		Configuration.Deployment.Requirements requirements = destination.requirements();
+		ProcessDeployment deployment = new ProcessDeployment().
 				groupId(configuration.artifact().groupId()).artifactId(configuration.artifact().name().toLowerCase()).version(configuration.artifact().version()).
 				jvmOptions(destination.runConfiguration().vmOptions()).
 				artifactoryList(artifactories()).
 				packaging(new ProcessDeployment.Packaging().mainClass(packageConfiguration.mainClass()).parameterList(extractParameters(destination.runConfiguration())).classpathPrefix(classpathPrefix == null || classpathPrefix.isEmpty() ? "dependency" : classpathPrefix)).
 				destinationServer(destination.server().name());
+		deployment.requirements(new ProcessDeployment.Requirements());
+		if (requirements != null && requirements.minMemory() > 0)
+			deployment.requirements().minMemory(requirements.minMemory());
+		if (requirements != null && requirements.maxMemory() > 0)
+			deployment.requirements().maxMemory(requirements.maxMemory());
+		return deployment;
 	}
 
 	private List<ProcessDeployment.Packaging.Parameter> extractParameters(Configuration.RunConfiguration configuration) {

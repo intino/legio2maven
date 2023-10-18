@@ -1,6 +1,6 @@
 dsl Legio
 
-Artifact("io.intino", "1.0.5") legio-deployer
+Artifact("io.intino", "1.0.6") legio-deployer
 	Imports
 		Test("junit", "junit", "4.13")
 		Compile("io.intino", "cesar-api-accessor", "5.2.4")
