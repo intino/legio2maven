@@ -2,6 +2,7 @@ package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
 import io.intino.legio.model.LegioGraph;
+import io.intino.legio.model.Repository;
 
 import java.util.List;
 
@@ -37,8 +38,8 @@ public class WrapperConfiguration implements Configuration {
 	public List<Repository> repositories() {
 		List<Repository> repos = graph.repositoryList().stream().filter(r -> r.release() != null).map(WrapperReleaseRepository::new).collect(toList());
 		repos.addAll(graph.repositoryList().stream().filter(r -> r.snapshot() != null).map(WrapperSnapshotRepository::new).toList());
-		repos.addAll(safe(() -> graph.project().repositoryList(), List.of()).stream().map(io.intino.legio.model.Repository.class::cast).filter(r -> r.release() != null).map(WrapperReleaseRepository::new).toList());
-		repos.addAll(safe(() -> graph.project().repositoryList(), List.of()).stream().map(io.intino.legio.model.Repository.class::cast).filter(r -> r.snapshot() != null).map(WrapperSnapshotRepository::new).toList());
+		repos.addAll(safe(() -> graph.project().repositoryList(), List.<io.intino.legio.model.Repository>of()).stream().filter(r -> r.release() != null).map(WrapperReleaseRepository::new).toList());
+		repos.addAll(safe(() -> graph.project().repositoryList(),  List.<io.intino.legio.model.Repository>of()).stream().filter(r -> r.snapshot() != null).map(WrapperSnapshotRepository::new).toList());
 		return repos;
 	}
 }

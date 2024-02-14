@@ -3,6 +3,7 @@ package io.intino.confloader.wrapper;
 import io.intino.Configuration;
 import io.intino.legio.model.Artifact;
 import io.intino.legio.model.LegioGraph;
+import io.intino.legio.model.Project;
 
 import java.util.List;
 
@@ -115,7 +116,7 @@ public class WrapperArtifact implements Configuration.Artifact {
 
 	@Override
 	public List<Configuration.Artifact.Developer> developers() {
-		return artifact.core$().graph().as(LegioGraph.class).project().developerList().stream().map(d -> new Configuration.Artifact.Developer() {
+		return safe(() -> artifact.core$().graph().as(LegioGraph.class).project().developerList(), List.<Project.Developer>of()).stream().map(d -> new Configuration.Artifact.Developer() {
 			@Override
 			public String name() {
 				return d.name();

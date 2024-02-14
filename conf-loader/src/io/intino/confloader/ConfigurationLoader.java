@@ -17,7 +17,7 @@ public class ConfigurationLoader {
 	public Configuration load(File artifactFile, File projectFile) {
 		StashBuilder builder = new StashBuilder(sources(artifactFile, projectFile), new Legio(), "example", System.out);
 		Stash[] build = builder.build();
-		return new WrapperConfiguration(new Graph().loadStashes(build).as(LegioGraph.class));
+		return new WrapperConfiguration(LegioGraph.load(build));
 	}
 
 	private static Map<File, Charset> sources(File artifactFile, File projectFile) {
