@@ -12,12 +12,12 @@ import java.net.URL;
 public class Main {
 
 
-	public static void main(String[] args)  {
-		if (args.length < 4) return;
-		Configuration configuration = configuration(args[0]);
+	public static void main(String[] args) {
+		if (args.length < 5) return;
+		Configuration configuration = configuration(args[0], args[1]);
 		System.out.println("Loaded configuration.");
-		ApiAccessor accessor = createAccessor(args[1], args[2]);
-		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor, new File(args[3]));
+		ApiAccessor accessor = createAccessor(args[2], args[3]);
+		ArtifactDeployer deployer = new ArtifactDeployer(configuration, accessor, new File(args[5]));
 		for (Configuration.Deployment deployment : configuration.artifact().deployments()) {
 			try {
 				deployer.deployTo(deployment);
@@ -29,9 +29,9 @@ public class Main {
 
 	}
 
-	private static Configuration configuration(String dir) {
+	private static Configuration configuration(String dir, String projectFile) {
 		File file = new File(new File(dir), "artifact.legio");
-		return new ConfigurationLoader().load(file);
+		return new ConfigurationLoader().load(file, new File(projectFile));
 	}
 
 	private static ApiAccessor createAccessor(String url, String token) {
