@@ -5,6 +5,7 @@ import io.intino.legio.model.LegioGraph;
 
 import java.util.List;
 
+import static io.intino.confloader.Safe.safe;
 import static java.util.stream.Collectors.toList;
 
 public class WrapperConfiguration implements Configuration {
@@ -34,8 +35,10 @@ public class WrapperConfiguration implements Configuration {
 
 	@Override
 	public List<Repository> repositories() {
-		List<Repository> repos = graph.repositoryList().stream().map(WrapperReleaseRepository::new).collect(toList());
+		List<Repository> repos = graph.repositoryList().stream().filter(r -> r.release() != null).map(WrapperReleaseRepository::new).collect(toList());
 		repos.addAll(graph.repositoryList().stream().filter(r -> r.snapshot() != null).map(WrapperSnapshotRepository::new).toList());
+		repos.addAll(safe(() -> graph.project().repositoryList(), List.of()).stream().map(io.intino.legio.model.Repository.class::cast).filter(r -> r.release() != null).map(WrapperReleaseRepository::new).toList());
+		repos.addAll(safe(() -> graph.project().repositoryList(), List.of()).stream().map(io.intino.legio.model.Repository.class::cast).filter(r -> r.snapshot() != null).map(WrapperSnapshotRepository::new).toList());
 		return repos;
 	}
 }

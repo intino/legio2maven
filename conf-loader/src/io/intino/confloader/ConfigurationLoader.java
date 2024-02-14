@@ -14,10 +14,15 @@ import java.util.Map;
 
 public class ConfigurationLoader {
 
-	public Configuration load(File legio) {
-		StashBuilder builder = new StashBuilder(Map.of(legio, Charset.defaultCharset()), new Legio(), "example", System.out);
+	public Configuration load(File artifactFile, File projectFile) {
+		StashBuilder builder = new StashBuilder(sources(artifactFile, projectFile), new Legio(), "example", System.out);
 		Stash[] build = builder.build();
-		LegioGraph graph = new Graph().loadStashes(build).as(LegioGraph.class);
-		return new WrapperConfiguration(graph);
+		return new WrapperConfiguration(new Graph().loadStashes(build).as(LegioGraph.class));
+	}
+
+	private static Map<File, Charset> sources(File artifactFile, File projectFile) {
+		return projectFile != null && projectFile.exists() ?
+				Map.of(artifactFile, Charset.defaultCharset(), projectFile, Charset.defaultCharset()) :
+				Map.of(artifactFile, Charset.defaultCharset());
 	}
 }

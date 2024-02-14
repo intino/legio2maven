@@ -64,16 +64,6 @@ public class WrapperDatahub implements Configuration.Artifact.Dependency.DataHub
 	}
 
 	@Override
-	public boolean resolved() {
-		return false;
-	}
-
-	@Override
-	public void resolved(boolean b) {
-
-	}
-
-	@Override
 	public boolean toModule() {
 		return false;
 	}

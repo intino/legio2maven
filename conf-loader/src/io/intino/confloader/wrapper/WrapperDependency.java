@@ -70,16 +70,6 @@ public class WrapperDependency implements Configuration.Artifact.Dependency {
 	}
 
 	@Override
-	public boolean resolved() {
-		return false;
-	}
-
-	@Override
-	public void resolved(boolean b) {
-
-	}
-
-	@Override
 	public boolean toModule() {
 		return false;
 	}
