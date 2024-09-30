@@ -1,4 +1,4 @@
-def type(package)
+rule type(package)
     {
         "name": "$artifactId",
         "version": "$version",
@@ -40,16 +40,12 @@ def type(package)
         	$resolution...[,$NL]
         }
     }
-end
 
-def trigger(dependency)
+rule trigger(dependency)
      "$name": "$version"
-end
 
-def trigger(resolution)
+rule trigger(resolution)
      "$name": "$version"
-end
 
-def trigger(fsevents)
+rule trigger(fsevents)
     "fsevents": "^2.1.2",
-end

@@ -78,4 +78,14 @@ public class WrapperDependency implements Configuration.Artifact.Dependency {
 	public void toModule(boolean b) {
 
 	}
+
+	@Override
+	public Configuration root() {
+		return null;
+	}
+
+	@Override
+	public Configuration.ConfigurationNode owner() {
+		return null;
+	}
 }

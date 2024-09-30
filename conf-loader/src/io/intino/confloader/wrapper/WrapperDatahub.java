@@ -2,7 +2,6 @@ package io.intino.confloader.wrapper;
 
 import io.intino.Configuration;
 import io.intino.legio.model.Artifact;
-import io.intino.legio.model.LegioGraph;
 
 import java.util.Collections;
 import java.util.List;
@@ -71,5 +70,15 @@ public class WrapperDatahub implements Configuration.Artifact.Dependency.DataHub
 	@Override
 	public void toModule(boolean b) {
 
+	}
+
+	@Override
+	public Configuration root() {
+		return null;
+	}
+
+	@Override
+	public Configuration.ConfigurationNode owner() {
+		return null;
 	}
 }

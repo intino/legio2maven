@@ -1,4 +1,4 @@
-def type(pom) type(deployFile)
+rule type(pom) and type(deployFile)
 	<?xml version="1.0" encoding="UTF-8"?>
 	<project xmlns="http://maven.apache.org/POM/4.0.0"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -12,9 +12,8 @@ def type(pom) type(deployFile)
 				$repository+release...[$NL]
 		</repositories>
 	</project>
-end
 
-def type(pom)
+rule type(pom)
 	<?xml version="1.0" encoding="UTF-8"?>
 	<project xmlns="http://maven.apache.org/POM/4.0.0"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -25,39 +24,39 @@ def type(pom)
 		<name>$artifactId+lowercase</name>
 		<version>$version</version>
 		<packaging>jar</packaging>
-		[<url>$url</url>]
-		[<description>$description</description>]
-		[<licenses>
+		<<~<url>$url</url>~>>
+		<<~<description>$description</description>~>>
+		<<~<licenses>
 			$license
-		</licenses>]
-		[$scm]
-		[<developers>
+		</licenses>~>>
+		<<$scm>>
+		<<~<developers>
 			$developer...[$NL]
-		</developers>]
-		[<properties>
+		</developers>~>>
+		<<~<properties>
 			<maven.compiler.source>$sdk</maven.compiler.source>
 			<maven.compiler.target>$sdk</maven.compiler.target>
 			<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		</properties>]
+		</properties>~>>
 
 		<build>
-			[<testSourceDirectory>test</testSourceDirectory>
+			<<~<testSourceDirectory>test</testSourceDirectory>
 			<outputDirectory>$outDirectory</outputDirectory>
 			<testOutputDirectory>$testOutDirectory</testOutputDirectory>
-			<directory>$buildDirectory~$artifactId+lowercase</directory>]
-			[<resources>
+			<directory>$buildDirectory~$artifactId+lowercase</directory>~>>
+			<<~<resources>
 				$resourceDirectory...[$NL]
-			</resources>]
-			[<testResources>
+			</resources>~>>
+			<<~<testResources>
 				$resourceTestDirectory...[$NL]
-			</testResources>]
+			</testResources>~>>
 			<plugins>
 				$dependencyCheck
 				<plugin>
 					  <artifactId>maven-clean-plugin</artifactId>
 					  <version>3.0.0</version>
 					</plugin>
-				[$compile<plugin>
+				<<$compile<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>3.8.0</version>
@@ -70,8 +69,8 @@ def type(pom)
 							</goals>
 						</execution>
 					</executions>
-				</plugin>]
-				[
+				</plugin>~>>
+				<<
 				$extractedLibraries
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -105,38 +104,38 @@ def type(pom)
 						</execution>
 					</executions>
 				</plugin>
-				]<plugin>
+				>><plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-jar-plugin</artifactId>
 					<version>3.2.0</version>
 					<configuration>
-						[<finalName>$finalName</finalName>]
+						<<~<finalName>$finalName</finalName>~>>
 						<archive>
 							<manifest>
 								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addClasspath>[$linkLibraries?false]</addClasspath>[
-								<mainClass>$mainClass</mainClass>]
-								[$copyDependencies+classpath]
+								<addClasspath><<$linkLibraries?false>></addClasspath><<
+								<mainClass>$mainClass</mainClass>~>>
+								<<$copyDependencies+classpath>>
 							</manifest>
 							<manifestSections>
-								[<manifestSection>
+								<<~<manifestSection>
 									<name>parameters</name>
 									<manifestEntries>
 									  $parameter...[$NL]
 									</manifestEntries>
-								</manifestSection>]
-								[<manifestSection>
+								</manifestSection>~>>
+								<<~<manifestSection>
 									<name>vmoptions</name>
 									<manifestEntries>
 										<value>$vmOptions</value>
 									</manifestEntries>
-								</manifestSection>]
+								</manifestSection>~>>
 							</manifestSections>
 						</archive>
 					</configuration>
 				</plugin>
-				[$copyDependencies]
-				[
+				<<$copyDependencies>>
+				<<
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>build-helper-maven-plugin</artifactId>
@@ -151,7 +150,7 @@ def type(pom)
 							<configuration>
 								<sources>
 									$sourceDirectory...[$NL]
-									$moduleDependency...[$NL]
+									$moduleDependency...[$NL>>
 								</sources>
 							</configuration>
 						</execution>
@@ -170,8 +169,8 @@ def type(pom)
 							</configuration>
 							</execution>
 					</executions>
-				</plugin>]
-				[$gpgSign<plugin>
+				</plugin>~]
+				<<$gpgSign<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-gpg-plugin</artifactId>
 					<version>1.5</version>
@@ -184,8 +183,8 @@ def type(pom)
 						</goals>
 					  </execution>
 					</executions>
-				</plugin>]
-				[$attachSources<plugin>
+				</plugin>~>>
+				<<$attachSources<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-source-plugin</artifactId>
 					<version>3.0.1</version>
@@ -197,8 +196,8 @@ def type(pom)
 							</goals>
 						</execution>
 					</executions>
-				</plugin>]
-				[$attachJavaDoc<plugin>
+				</plugin>~>>
+				<<$attachJavaDoc<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-javadoc-plugin</artifactId>
 					<version>3.2.0</version>
@@ -210,10 +209,10 @@ def type(pom)
 							</goals>
 						</execution>
 					</executions>
-					</plugin>]
-				[$osx]
-				[$windows]
-				[$mavenPlugin...[$NL]]
+					</plugin>~>>
+				<<$osx>>
+				<<$windows>>
+				<<$mavenPlugin...[$NL]>>
 			</plugins>
 		</build>
 
@@ -230,21 +229,17 @@ def type(pom)
 			$dependency...[$NL]
 		</dependencies>
 	</project>
-end
 
-def trigger(sourceDirectory)
+rule trigger(sourceDirectory)
 	<source>$this</source>
-end
 
-def trigger(testModuleDependency)
+rule trigger(testModuleDependency)
 	<source>$this</source>
-end
 
-def trigger(moduleDependency)
+rule trigger(moduleDependency)
 	<source>$this</source>
-end
 
-def trigger(dependencyCheck)
+rule trigger(dependencyCheck)
 	<plugin>
 		<groupId>org.owasp</groupId>
 		<artifactId>dependency-check-maven</artifactId>
@@ -262,68 +257,58 @@ def trigger(dependencyCheck)
 			</execution>
 		</executions>
 	</plugin>
-end
 
-def trigger(resourceDirectory)
+rule trigger(resourceDirectory)
 	<resource><directory>$this</directory></resource>
-end
 
-def trigger(resourceTestDirectory)
+rule trigger(resourceTestDirectory)
 	<testResource><directory>$this</directory></testResource>
-end
 
-def type(repository) type(Distribution) trigger(distribution)
+rule type(repository) and type(Distribution) and trigger(distribution)
 	<repository>
 		<id>$name</id>
 		<name>$name</name>
 		<url>$url</url>
 	</repository>
-end
 
-def trigger(developer)
+rule trigger(developer)
 	 <developer>
 		 <name>$name</name>
 		 <email>$email</email>
 		 <organization>$organization</organization>
 		 <organizationUrl>$organizationUrl</organizationUrl>
 	</developer>
-end
 
-def trigger(distribution)
-end
+rule trigger(distribution)
 
-def type(repository) !type(Distribution) trigger(release)
+rule type(repository) and not type(Distribution) and trigger(release)
 	<repository>
 		<id>$name$type</id>
 		<url>$url</url>
-		[<snapshots><enabled>$snapshot</enabled></snapshots>]
+		<<~<snapshots><enabled>$snapshot</enabled></snapshots>~>>
 	</repository>
-end
 
-def trigger(parameter)
-	<_$key>$this[##$description]</_$key>
-end
+rule trigger(parameter)
+	<_$key>$this<<##$description>></_$key>
 
-def type(dependency) trigger(dependency)
+rule type(dependency) and trigger(dependency)
 	<dependency>
 		<groupId>$groupId</groupId>
 		<artifactId>$artifactId</artifactId>
 		<scope>$scope+lowercase</scope>
 		<version>$version</version>
-		[<exclusions>
+		<<~<exclusions>
 			$exclusion...[$NL]
-		</exclusions>]
+		</exclusions>~>>
 	</dependency>
-end
 
-def trigger(exclusion)
+rule trigger(exclusion)
 	<exclusion>
 		<groupId>$groupId</groupId>
 		<artifactId>$artifactId</artifactId>
 	</exclusion>
-end
 
-def trigger(scm)
+rule trigger(scm)
 	<scm>
 		<url>$url</url>
 		<connection>$connection</connection>
@@ -331,37 +316,33 @@ def trigger(scm)
 		<tag>$tag</tag>
 	</scm>
 
-end
 
-def type(GPL) trigger(license)
+rule type(GPL) and trigger(license)
 	<license>
 		<name>The GNU General Public License v3.0</name>
 		<url>https://www.gnu.org/licenses/gpl-3.0.txt</url>
 	</license>
-end
 
-def type(LGPL) trigger(license)
+rule type(LGPL) and trigger(license)
 	<license>
 		<name>GNU Lesser General Public License v3.0</name>
 		<url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
 	</license>
-end
 
-def type(BSD) trigger(license)
+rule type(BSD) and trigger(license)
 	<license>
 		<name>BSD 3-Clause License</name>
 		<url>https://opensource.org/licenses/BSD-3-Clause</url>
 	</license>
-end
 
-def trigger(osx)
+rule trigger(osx)
 	<plugin>
 		<groupId>sh.tak.appbundler</groupId>
 		<artifactId>appbundle-maven-plugin</artifactId>
 		<version>1.2.0</version>
 		<configuration>
 			<mainClass>$mainClass</mainClass>
-			[<iconFile>$icon</iconFile>]
+			<<~<iconFile>$icon</iconFile>~>>
 			<jvmVersion>1.8+</jvmVersion>
 		</configuration>
 		<executions>
@@ -373,9 +354,8 @@ def trigger(osx)
 			</execution>
 		</executions>
 	</plugin>
-end
 
-def trigger(windows)
+rule trigger(windows)
 	<plugin>
 		<groupId>com.akathist.maven.plugins.launch4j</groupId>
 		<artifactId>launch4j-maven-plugin</artifactId>
@@ -416,13 +396,11 @@ def trigger(windows)
 			</execution>
 		</executions>
 	</plugin>
-end
 
-def type(copyDependencies) trigger(classpath)
-	<classpathPrefix>[$classpathPrefix?dependency]/</classpathPrefix>
-end
+rule type(copyDependencies) and trigger(classpath)
+	<classpathPrefix><<$classpathPrefix?dependency>>/</classpathPrefix>
 
-def trigger(copyDependencies)
+rule trigger(copyDependencies)
 	<plugin>
 		<groupId>org.apache.maven.plugins</groupId>
 		<artifactId>maven-dependency-plugin</artifactId>
@@ -434,8 +412,8 @@ def trigger(copyDependencies)
 				<goals>
 					<goal>copy-dependencies</goal>
 				</goals>
-				<configuration>[
-					<outputDirectory>$${project.build.directory}/$classpathPrefix</outputDirectory>]
+				<configuration><<
+					<outputDirectory>$${project.build.directory}/$classpathPrefix</outputDirectory>~>>
 					<useBaseVersion>false</useBaseVersion>
 					<includeScope>runtime</includeScope>
 					<overWriteReleases>false</overWriteReleases>
@@ -445,4 +423,3 @@ def trigger(copyDependencies)
 			</execution>
 		</executions>
 	</plugin>
-end

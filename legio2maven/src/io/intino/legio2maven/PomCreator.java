@@ -6,9 +6,10 @@ import io.intino.Configuration.Artifact.Dependency;
 import io.intino.Configuration.Artifact.Package.Mode;
 import io.intino.Configuration.Repository;
 import io.intino.alexandria.logger.Logger;
+import io.intino.itrules.Engine;
 import io.intino.itrules.Frame;
 import io.intino.itrules.FrameBuilder;
-import io.intino.itrules.Template;
+import io.intino.itrules.template.Template;
 
 import java.io.File;
 import java.io.IOException;
@@ -97,10 +98,10 @@ public class PomCreator {
 		builder.add("compile", " ");
 		Set<String> dependencies = new HashSet<>();
 		List<Dependency> moduleDependencies = collectDependencies();
-		for (Dependency dependency : moduleDependencies.stream().filter(d -> !d.scope().equalsIgnoreCase("test")).collect(Collectors.toList()))
+		for (Dependency dependency : moduleDependencies.stream().filter(d -> !d.scope().equalsIgnoreCase("test")).toList())
 			if (dependencies.add(dependency.identifier()))
 				builder.add("dependency", createDependencyFrame(dependency));
-		for (Dependency dependency : moduleDependencies.stream().filter(d -> d.scope().equalsIgnoreCase("test")).collect(Collectors.toList()))
+		for (Dependency dependency : moduleDependencies.stream().filter(d -> d.scope().equalsIgnoreCase("test")).toList())
 			if ((!dependency.toModule() || (dependency.toModule() && allModulesSeparated())) && dependencies.add(dependency.identifier()))
 				builder.add("dependency", createDependencyFrame(dependency));
 
@@ -113,9 +114,9 @@ public class PomCreator {
 	private List<Dependency> collectDependencies() {
 		List<Dependency> deps = new ArrayList<>(safeList(() -> configuration.artifact().dependencies())).stream().filter(d -> !(d instanceof Dependency.Web)).collect(Collectors.toList());
 		Dependency datahub = configuration.artifact().datahub();
-		if (datahub != null) deps.add(0, datahub);
+		if (datahub != null) deps.addFirst(datahub);
 		Dependency archetype = configuration.artifact().archetype();
-		if (archetype != null) deps.add(0, archetype);
+		if (archetype != null) deps.addFirst(archetype);
 		return deps;
 	}
 
@@ -258,7 +259,7 @@ public class PomCreator {
 
 	private void writePom(File pom, Frame frame, Template template) {
 		try {
-			Files.write(pom.toPath(), template.render(frame).getBytes());
+			Files.write(pom.toPath(), new Engine(template).render(frame).getBytes());
 		} catch (IOException e) {
 			Logger.error("Error creating pomFile to publish action: " + e.getMessage());
 		}

@@ -4,8 +4,7 @@ import io.intino.Configuration;
 import io.intino.confloader.wrapper.WrapperConfiguration;
 import io.intino.legio.model.LegioGraph;
 import io.intino.magritte.builder.StashBuilder;
-import io.intino.magritte.framework.Graph;
-import io.intino.magritte.io.Stash;
+import io.intino.magritte.io.model.Stash;
 import tara.dsl.Legio;
 
 import java.io.File;

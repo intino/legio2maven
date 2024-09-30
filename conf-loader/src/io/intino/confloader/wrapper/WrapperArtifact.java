@@ -60,13 +60,8 @@ public class WrapperArtifact implements Configuration.Artifact {
 	}
 
 	@Override
-	public Configuration.Artifact.Model model() {
-		return null;
-	}
-
-	@Override
-	public Configuration.Artifact.Box box() {
-		return new WrapperBox(artifact);
+	public List<Configuration.Artifact.Dsl> dsls() {
+		return List.of(new WrapperDsl(artifact));
 	}
 
 	@Override
