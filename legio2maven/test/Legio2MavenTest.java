@@ -5,6 +5,6 @@ public class Legio2MavenTest {
 
 	@Test
 	public void testProject() {
-		Legio2Maven.main(new String[]{"/Users/oroncal/workspace/infrastructure/archetype", null});
+		Legio2Maven.main(new String[]{"/Users/oroncal/Downloads/", "/Users/oroncal/Downloads/project.legio"});
 	}
 }
