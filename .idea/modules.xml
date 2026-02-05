@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/conf-loader/conf-loader.iml" filepath="$PROJECT_DIR$/conf-loader/conf-loader.iml" />
       <module fileurl="file://$PROJECT_DIR$/legio-deployer/legio-deployer.iml" filepath="$PROJECT_DIR$/legio-deployer/legio-deployer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/legio-model/legio-model.iml" filepath="$PROJECT_DIR$/legio-model/legio-model.iml" />
       <module fileurl="file://$PROJECT_DIR$/legio2maven/legio2maven.iml" filepath="$PROJECT_DIR$/legio2maven/legio2maven.iml" />
       <module fileurl="file://$PROJECT_DIR$/legio2packagejson/legio2packagejson.iml" filepath="$PROJECT_DIR$/legio2packagejson/legio2packagejson.iml" />
     </modules>

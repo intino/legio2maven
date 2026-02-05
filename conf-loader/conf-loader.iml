@@ -26,6 +26,6 @@
     <orderEntry type="library" name="Intino: io.intino.magritte:io:5.0.0" level="project" />
     <orderEntry type="library" name="Intino: io.intino.tara:language:1.6.0" level="project" />
     <orderEntry type="library" name="Intino: io.intino.magritte:framework:5.2.1" level="project" />
-    <orderEntry type="library" name="Intino: io.intino.legio:legio:4.0.0" level="project" />
+    <orderEntry type="library" name="Intino: io.intino:legio-model:1.0.0" level="project" />
   </component>
 </module>

@@ -41,8 +41,8 @@ public class PomCreator {
 		Artifact.Package build = safe(() -> configuration.artifact().packageConfiguration());
 		FrameBuilder builder = new FrameBuilder();
 		fillMavenId(builder);
-		final String[] languageLevel = {"11"};
-		builder.add("sdk", languageLevel[0]);
+//		final String[] languageLevel = {"11"};
+//		builder.add("sdk", languageLevel[0]);
 		fillFramework(build, builder);
 		writePom(pom, builder.toFrame(), new PomTemplate());
 	}

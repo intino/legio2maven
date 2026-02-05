@@ -1,0 +1,9 @@
+dsl Legio
+
+Artifact("io.intino", "1.0.0") legio-model
+	Imports
+		Compile("io.intino.magritte", "framework", "5.2.1")
+		Compile("io.intino.magritte", "io", "5.0.0")
+		Test(groupId = "junit", artifactId = "junit", version = "4.13")
+	Package(mode = ModulesAndLibrariesLinkedByManifest)
+RunConfiguration local
