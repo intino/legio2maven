@@ -71,7 +71,7 @@ public class WrapperArtifact implements Configuration.Artifact {
 
 	@Override
 	public Configuration.Artifact.Dependency.Archetype archetype() {
-		return null;
+		return artifact.dataHub() == null ? null : new WrapperArchetype(artifact);
 	}
 
 	@Override
