@@ -21,6 +21,5 @@ Artifact("io.intino", "1.2.1") legio2packagejson
 	Distribution > Artifactory ("intino-maven")
 			Release("https://artifactory.intino.io/artifactory/release-libraries")
 			Snapshot("https://artifactory.intino.io/artifactory/snapshot-libraries")
-Repository(identifier = "intino-maven") > Release("https://artifactory.intino.io/artifactory/releases")
 
 RunConfiguration local
