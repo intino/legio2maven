@@ -1,6 +1,6 @@
 dsl Legio
 
-Artifact("io.intino", "1.2.4") legio2maven
+Artifact("io.intino", "1.2.5") legio2maven
 	Imports
 		Compile("io.intino.itrules", "engine", "2.0.0")
 		Compile("io.intino.alexandria", "logger", "2.1.0")
