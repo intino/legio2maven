@@ -13,7 +13,7 @@ public class WrapperWebComponent implements Configuration.Artifact.WebComponent 
 
 	@Override
 	public String name() {
-		return dep.name$();
+		return dep.url();
 	}
 
 	@Override
