@@ -13,6 +13,11 @@ public class WrapperDsl implements Configuration.Artifact.Dsl {
 	}
 
 	@Override
+	public String groupId() {
+		return "";
+	}
+
+	@Override
 	public String name() {
 		return artifact.dsl(0).name();
 	}

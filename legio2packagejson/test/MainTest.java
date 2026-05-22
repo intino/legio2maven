@@ -7,6 +7,6 @@ public class MainTest {
 	@Test
 	@Ignore
 	public void name() {
-		Legio2PackageJson.main(new String[]{"/Users/oroncal/workspace/sandbox/sinergia/sinergiadeseo/automoviles/core-elements", null, "/Users/oroncal/workspace/infrastructure/legio2maven/temp/legio-deployer-credentials.tsv"});
+		Legio2PackageJson.main(new String[]{"/Users/oroncal/workspace/infrastructure/quassar/editor-elements/", null, "/Users/oroncal/workspace/infrastructure/legio2maven/temp/legio-deployer-credentials.tsv"});
 	}
 }

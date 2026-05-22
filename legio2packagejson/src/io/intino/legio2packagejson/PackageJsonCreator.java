@@ -21,12 +21,14 @@ public class PackageJsonCreator {
 	private final List<Artifact.WebComponent> webComponents;
 	private final List<Artifact.WebResolution> resolutions;
 	private final WebArtifactResolver webArtifactResolver;
+	private final List<Artifact.PackDependency> packDependencies;
 	private Map<String, Map.Entry<String, String>> credentials;
 
 	public PackageJsonCreator(Configuration conf, File credentialsFile, File destination) {
 		this.artifact = conf.artifact();
 		this.webComponents = artifact.webComponents();
 		this.resolutions = artifact.webResolutions();
+		this.packDependencies = artifact.packDependencies();
 		loadCredentials(credentialsFile);
 		this.webArtifactResolver = new WebArtifactResolver(artifact, conf.repositories(), credentials, destination);
 	}
@@ -46,6 +48,7 @@ public class PackageJsonCreator {
 		Map<String, String> dependencies = collectDependencies(packages);
 		dependencies.forEach((key, value) -> builder.add("dependency", new FrameBuilder().add("name", key).add("version", value)));
 		resolutions.forEach(resolution -> builder.add("resolution", resolutionFrameFrom(resolution)));
+		packDependencies.forEach(pack -> builder.add("packDependency", packFrameFrom(pack)));
 		packages.stream().map(this::resolutionFrameFrom).filter(Objects::nonNull).forEach(frames -> builder.add("resolution", frames));
 		return builder;
 	}
@@ -74,6 +77,9 @@ public class PackageJsonCreator {
 		return new FrameBuilder().add("name", resolution.name()).add("version", resolution.version()).toFrame();
 	}
 
+	private Frame packFrameFrom(Artifact.PackDependency p) {
+		return new FrameBuilder().add("name", p.name()).add("version", p.version()).toFrame();
+	}
 
 	private Map<String, String> dependenciesFrom(JsonObject object) {
 		Map<String, String> map = new HashMap<>();

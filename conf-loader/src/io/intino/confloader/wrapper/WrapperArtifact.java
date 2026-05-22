@@ -85,6 +85,11 @@ public class WrapperArtifact implements Configuration.Artifact {
 	}
 
 	@Override
+	public List<Configuration.Artifact.PackDependency> packDependencies() {
+		return safeList(() -> artifact.webImports().packDependencyList().stream().map(WrapperPackDependency::new).collect(toList()));
+	}
+
+	@Override
 	public List<Configuration.Artifact.WebResolution> webResolutions() {
 		return safeList(() -> artifact.webImports().resolutionList().stream().map(WrapperResolution::new).collect(toList()));
 	}
@@ -238,6 +243,11 @@ public class WrapperArtifact implements Configuration.Artifact {
 			}
 
 			@Override
+			public boolean isContainer() {
+				return false;
+			}
+
+			@Override
 			public MacOs macOsConfiguration() {
 				return null;
 			}
@@ -258,15 +268,23 @@ public class WrapperArtifact implements Configuration.Artifact {
 	public Configuration.Distribution distribution() {
 		return new Configuration.Distribution() {
 			@Override
-			public Configuration.Repository release() {
-				List<Artifact.Distribution.Artifactory> artifactories = artifact.distribution().artifactoryList();
-				return artifactories.isEmpty() ? null : repository(artifactories.get(0), false);
+			public ArtifactoryDistribution onArtifactory() {
+				return new ArtifactoryDistribution() {
+					public Configuration.Repository release() {
+						List<Artifact.Distribution.Artifactory> artifactories = artifact.distribution().artifactoryList();
+						return artifactories.isEmpty() ? null : repository(artifactories.get(0), false);
+					}
+
+					public Configuration.Repository snapshot() {
+						List<Artifact.Distribution.Artifactory> artifactories = artifact.distribution().artifactoryList();
+						return artifactories.isEmpty() || artifactories.get(0).snapshot() == null ? null : repository(artifactories.get(0), true);
+					}
+				};
 			}
 
 			@Override
-			public Configuration.Repository snapshot() {
-				List<Artifact.Distribution.Artifactory> artifactories = artifact.distribution().artifactoryList();
-				return artifactories.isEmpty() || artifactories.get(0).snapshot() == null ? null : repository(artifactories.get(0), true);
+			public SonatypeDistribution onSonatype() {
+				return null;
 			}
 
 			@Override

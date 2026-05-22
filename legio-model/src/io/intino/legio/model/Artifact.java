@@ -2317,6 +2317,7 @@ public class Artifact extends Layer implements Terminal {
 
 	public static class WebImports extends Layer implements Terminal {
 		protected String webDirectory;
+		protected List<PackDependency> packDependencyList = new ArrayList();
 		protected List<Resolution> resolutionList = new ArrayList();
 		protected List<WebComponent> webComponentList = new ArrayList();
 		protected List<WebArtifact> webArtifactList = new ArrayList();
@@ -2332,6 +2333,10 @@ public class Artifact extends Layer implements Terminal {
 		public WebImports webDirectory(String value) {
 			this.webDirectory = value;
 			return this;
+		}
+
+		public List<PackDependency> packDependencyList() {
+			return Collections.unmodifiableList(this.packDependencyList);
 		}
 
 		public List<Resolution> resolutionList() {
@@ -2384,6 +2389,7 @@ public class Artifact extends Layer implements Terminal {
 
 		protected List<Node> componentList$() {
 			Set<Node> components = new LinkedHashSet(super.componentList$());
+			(new ArrayList<>(this.packDependencyList)).forEach((c) -> components.add(c.core$()));
 			(new ArrayList<>(this.resolutionList)).forEach((c) -> components.add(c.core$()));
 			(new ArrayList<>(this.webComponentList)).forEach((c) -> components.add(c.core$()));
 			(new ArrayList<>(this.webArtifactList)).forEach((c) -> components.add(c.core$()));
@@ -2398,6 +2404,9 @@ public class Artifact extends Layer implements Terminal {
 
 		protected void addNode$(Node node) {
 			super.addNode$(node);
+			if (node.is("Artifact$WebImports$PackDependency")) {
+				this.packDependencyList.add((PackDependency) node.as(PackDependency.class));
+			}
 			if (node.is("Artifact$WebImports$Resolution")) {
 				this.resolutionList.add((Resolution) node.as(Resolution.class));
 			}
@@ -2414,6 +2423,10 @@ public class Artifact extends Layer implements Terminal {
 
 		protected void removeNode$(Node node) {
 			super.removeNode$(node);
+			if (node.is("Artifact$WebImports$PackDependency")) {
+				this.packDependencyList.remove(node.as(PackDependency.class));
+			}
+
 			if (node.is("Artifact$WebImports$Resolution")) {
 				this.resolutionList.remove(node.as(Resolution.class));
 			}
@@ -2467,6 +2480,14 @@ public class Artifact extends Layer implements Terminal {
 				this.name = name;
 			}
 
+			public PackDependency packDependency(String name, String version) {
+				PackDependency newElement = (PackDependency) WebImports.this.core$().graph().concept(PackDependency.class).createNode(this.name, WebImports.this.core$()).as(PackDependency.class);
+				newElement.core$().set(newElement, "name", Collections.singletonList(name));
+				newElement.core$().set(newElement, "version", Collections.singletonList(version));
+				return newElement;
+			}
+
+
 			public Resolution resolution(String name, String version) {
 				Resolution newElement = (Resolution) WebImports.this.core$().graph().concept(Resolution.class).createNode(this.name, WebImports.this.core$()).as(Resolution.class);
 				newElement.core$().set(newElement, "name", Collections.singletonList(name));
@@ -2502,6 +2523,65 @@ public class Artifact extends Layer implements Terminal {
 				(new ArrayList<>(WebImports.this.webArtifactList())).stream().filter(filter).forEach(Layer::delete$);
 			}
 		}
+
+		public static class PackDependency extends Layer implements Terminal {
+			protected String name;
+			protected String version;
+
+			public PackDependency(Node node) {
+				super(node);
+			}
+
+			public String name() {
+				return this.name;
+			}
+
+			public String version() {
+				return this.version;
+			}
+
+			public PackDependency name(String value) {
+				this.name = value;
+				return this;
+			}
+
+			public PackDependency version(String value) {
+				this.version = value;
+				return this;
+			}
+
+			protected Map<String, List<?>> variables$() {
+				Map<String, List<?>> map = new LinkedHashMap();
+				map.put("name", new ArrayList(Collections.singletonList(this.name)));
+				map.put("version", new ArrayList(Collections.singletonList(this.version)));
+				return map;
+			}
+
+			protected void load$(String name, List<?> values) {
+				super.load$(name, values);
+				if (name.equalsIgnoreCase("name")) {
+					this.name = (String) StringLoader.load(values, this).get(0);
+				} else if (name.equalsIgnoreCase("version")) {
+					this.version = (String) StringLoader.load(values, this).get(0);
+				}
+
+			}
+
+			protected void set$(String name, List<?> values) {
+				super.set$(name, values);
+				if (name.equalsIgnoreCase("name")) {
+					this.name = (String) values.get(0);
+				} else if (name.equalsIgnoreCase("version")) {
+					this.version = (String) values.get(0);
+				}
+
+			}
+
+			public LegioGraph graph() {
+				return (LegioGraph) this.core$().graph().as(LegioGraph.class);
+			}
+		}
+
 
 		public static class Resolution extends Layer implements Terminal {
 			protected String name;

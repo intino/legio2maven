@@ -159,12 +159,14 @@ public class PomCreator {
 	private void configureBuild(FrameBuilder builder, Artifact artifact, Artifact.Package aPackage) {
 		if (artifact.url() != null) builder.add("url", artifact.url());
 		if (artifact.description() != null) builder.add("description", artifact.description());
-		if (aPackage.attachSources()) builder.add("attachSources", " ");
-		if (aPackage.signArtifactWithGpg()) builder.add("gpgSign", " ");
-		if (aPackage.attachDoc()) builder.add("attachJavaDoc", " ");
-		if (aPackage.isRunnable()) {
-			if (aPackage.macOsConfiguration() != null) builder.add("osx", osx(aPackage));
-			if (aPackage.windowsConfiguration() != null) builder.add("windows", windows(aPackage));
+		if (aPackage != null) {
+			if (aPackage.attachSources()) builder.add("attachSources", " ");
+			if (aPackage.signArtifactWithGpg()) builder.add("gpgSign", " ");
+			if (aPackage.attachDoc()) builder.add("attachJavaDoc", " ");
+			if (aPackage.isRunnable()) {
+				if (aPackage.macOsConfiguration() != null) builder.add("osx", osx(aPackage));
+				if (aPackage.windowsConfiguration() != null) builder.add("windows", windows(aPackage));
+			}
 		}
 		final Mode type = aPackage.mode();
 		if (type.equals(LibrariesLinkedByManifest) || type.equals(ModulesAndLibrariesLinkedByManifest)) {
