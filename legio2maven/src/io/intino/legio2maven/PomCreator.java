@@ -130,8 +130,8 @@ public class PomCreator {
 	private Repository distributionRepository() {
 		try {
 			Version version = version();
-			if (version.isSnapshot()) return safe(() -> configuration.artifact().distribution().snapshot());
-			return safe(() -> configuration.artifact().distribution().release());
+			if (version.isSnapshot()) return safe(() -> configuration.artifact().distribution().onArtifactory().snapshot());
+			return safe(() -> configuration.artifact().distribution().onArtifactory().release());
 		} catch (Exception e) {
 			Logger.error(e);
 			return null;
