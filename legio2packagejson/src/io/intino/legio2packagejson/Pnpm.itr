@@ -1,6 +1,6 @@
 rule type(package)
 	overrides:
-	  $resolution...[,$NL]
+	  $resolution...[$NL]
 
 
 rule trigger(resolution)
