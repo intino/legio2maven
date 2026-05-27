@@ -34,7 +34,9 @@ public class PackageJsonCreator {
 	}
 
 	public void createPackageFile(File rootDirectory) {
-		write(new Package_jsonTemplate().render(packageFrame().toFrame()), new File(rootDirectory, "package.json"));
+		Frame frame = packageFrame().toFrame();
+		write(new Package_jsonTemplate().render(frame), new File(rootDirectory, "package.json"));
+		write(new PnpmTemplate().render(frame), new File(rootDirectory, "pnpm-workspace.yaml"));
 	}
 
 	public void extractArtifacts() {

@@ -1,0 +1,6 @@
+rule type(pnpm)
+	"overrides":
+		$resolution...[,$NL]
+
+rule trigger(resolution)
+     $name: $version
