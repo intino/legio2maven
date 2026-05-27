@@ -13,7 +13,7 @@ public class PnpmTemplate extends Template {
 
 	public List<Rule> ruleSet() {
 		List<Rule> rules = new ArrayList<>();
-		rules.add(rule().condition(allTypes("package")).output(literal("\"overrides\":\n\t")).output(placeholder("resolution").multiple(",\n")));
+		rules.add(rule().condition(allTypes("package")).output(literal("overrides:\n  ")).output(placeholder("resolution").multiple(",\n")).output(literal("\n")));
 		rules.add(rule().condition(trigger("resolution")).output(literal(" ")).output(placeholder("name")).output(literal(": ")).output(placeholder("version")));
 		return rules;
 	}

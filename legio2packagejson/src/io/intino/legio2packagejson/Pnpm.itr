@@ -1,6 +1,7 @@
 rule type(package)
-	"overrides":
-		$resolution...[,$NL]
+	overrides:
+	  $resolution...[,$NL]
+
 
 rule trigger(resolution)
      $name: $version
