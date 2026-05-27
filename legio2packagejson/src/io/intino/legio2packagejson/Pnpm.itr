@@ -1,4 +1,4 @@
-rule type(pnpm)
+rule type(package)
 	"overrides":
 		$resolution...[,$NL]
 
